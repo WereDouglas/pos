@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>vugaco CashIT</title>
+        <title>vugaPos</title>
 
         <meta name="description" content="overview &amp; stats" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -44,7 +44,7 @@
                         <small>
                             <img height="20px" width="20px"src="<?= base_url(); ?>images/ic_launcher.png" class="msg-photo" alt="Alex's Avatar" />
                                        
-                            CashIT POS
+                            vugaPOS
                         </small>
                     </a><!--/.brand-->
 

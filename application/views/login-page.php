@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Login -CashIT</title>
+		<title>Login -vugaPOS</title>
 
 		<meta name="description" content="User login page" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -47,7 +47,7 @@
 									<h1>
 										 <img height="120px" width="120px"src="<?= base_url(); ?>images/ic_launcher.png" class="msg-photo" alt="Alex's Avatar" />
                           
-										<span class="red">CashIT</span>
+										<span class="red">vuga</span>
 										<span class="white">POS</span>
 									</h1>
 									<h4 class="blue">&copy;vugaco</h4>
