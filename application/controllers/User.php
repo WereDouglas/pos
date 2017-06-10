@@ -17,23 +17,17 @@ class User extends CI_Controller {
     }
 
     public function index() {
-        //  $query = $this->Md->query("SELECT * FROM client where org = '" . $this->session->userdata('orgID') . "' ");
-
-        if (strpos($this->session->userdata('permission'), 'administrator') == true) {
-            $query = $this->Md->query("SELECT *,user.id AS id ,user.image AS image,company.name AS company,user.name AS name,roles.name AS role FROM user LEFT JOIN company ON user.company = company.id LEFT JOIN roles ON  roles.id = user.role WHERE roles.name<>'Administrator'");
-        } else {
-            $query = $this->Md->query("SELECT *,user.id AS id,user.image AS image ,company.name AS company,user.name AS name,roles.name AS role FROM user LEFT JOIN company ON user.company = company.id LEFT JOIN roles ON  roles.id = user.role WHERE user.company='" . $this->session->userdata('companyID') . "' AND roles.name<>'Administrator'");
-        }
+     
+            $query = $this->Md->query("SELECT *,users.id AS id,users.image AS image FROM users");
+      
         if ($query) {
             $data['users'] = $query;
         } else {
             $data['users'] = array();
         }
-        if ($this->session->userdata('companyID') == "") {
+       
             $query = $this->Md->query("SELECT * FROM roles");
-        } else {
-            $query = $this->Md->query("SELECT * FROM roles WHERE name<>'Administrator' AND companyID='" . $this->session->userdata('companyID') . "' ");
-        }
+        
         if ($query) {
             $data['roles'] = $query;
         }

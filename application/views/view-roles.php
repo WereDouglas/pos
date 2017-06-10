@@ -49,8 +49,8 @@
                                             <td >
                                                 <?php echo $loop->id; ?>
                                             </td>
-                                            <td id="name:<?php echo $loop->id; ?>" contenteditable="true">
-                                                <?php echo $loop->name; ?>
+                                            <td id="title:<?php echo $loop->id; ?>" contenteditable="true">
+                                                <?php echo $loop->title; ?>
                                             </td>
                                             <td id="actions:<?php echo $loop->id; ?>" contenteditable="true">
                                                 <?php echo $loop->actions; ?>

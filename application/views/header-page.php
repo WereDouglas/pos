@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
 
         <!--ace styles-->
-
+        <link rel=icon href="<?= base_url(); ?>images/favicon.ico">
         <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace.min.css" />
         <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-responsive.min.css" />
         <link rel="stylesheet" href="<?= base_url(); ?>assets/css/ace-skins.min.css" />
@@ -42,9 +42,8 @@
                 <div class="container-fluid">
                     <a href="#" class="brand">
                         <small>
-                            <img height="20px" width="20px"src="<?= base_url(); ?>images/ic_launcher.png" class="msg-photo" alt="Alex's Avatar" />
-                                       
-                            vugaPOS
+                            <img height="50px" width="80px" src="<?= base_url(); ?>images/vugapos.png" class="msg-photo" alt="Logo" />
+
                         </small>
                     </a><!--/.brand-->
 
@@ -342,10 +341,16 @@
                             <span class="menu-text"> Dashboard </span>
                         </a>
                     </li>
-                      <li>
+                     <li>
+                        <a target="frame" href="<?php echo base_url() . "index.php/purchase/"; ?>">
+                            <i class="icon-shopping-cart"></i>
+                            <span class="menu-text"> Sale Register(POS)</span>
+                        </a>
+                    </li>
+                    <li>
                         <a target="frame" href="<?php echo base_url() . "index.php/purchase/"; ?>">
                             <i class="icon-tag"></i>
-                            <span class="menu-text"> Purchase order</span>
+                            <span class="menu-text"> Purchase Register</span>
                         </a>
                     </li>
                     <li>
@@ -358,38 +363,57 @@
                     <li>
                         <a target="frame" href="<?php echo base_url() . "index.php/item/"; ?>">
                             <i class="icon-list"></i>
-                            <span class="menu-text"> Merchandise/Items for sale </span>
+                            <span class="menu-text"> Inventory  </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="frame" href="<?php echo base_url() . "index.php/bill/"; ?>">
+                            <i class="icon-file-alt"></i>
+                            <span class="menu-text"> Billings /Transactions</span>
                         </a>
                     </li>
                     <li>
                         <a target="frame" href="<?php echo base_url() . "index.php/stock/"; ?>">
-                            <i class="icon-edit"></i>
-                            <span class="menu-text"> Items in stock </span>
+                            <i class="icon-pencil"></i>
+                            <span class="menu-text"> Stock taking</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="frame" href="<?php echo base_url() . "index.php/stock/taking"; ?>">
+                            <i class="icon-tablet"></i>
+                            <span class="menu-text"> Inventory records</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="frame" href="<?php echo base_url() . "index.php/legder/"; ?>">
+                            <i class="icon-book"></i>
+                            <span class="menu-text"> Legders</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="frame" href="<?php echo base_url() . "index.php/expense/"; ?>">
+                            <i class="icon-shopping-cart"></i>
+                            <span class="menu-text"> Expenses</span>
                         </a>
                     </li>
                     <li>
                         <a target="frame" href="<?php echo base_url() . "index.php/supplier/"; ?>">
-                           <i class="icon-list-alt"></i>
-                            <span class="menu-text">Supplier </span>
+                            <i class="icon-globe"></i>
+                            <span class="menu-text">Supplier& Customers</span>
                         </a>
                     </li>
-                    <li>
-                        <a target="frame" href="<?php echo base_url() . "index.php/customer/"; ?>">
-                             <i class="icon-picture"></i>
-                            <span class="menu-text"> Customers </span>
-                        </a>
-                    </li>
+                
                     <li>
                         <a target="frame" href="<?php echo base_url() . "index.php/category/"; ?>">
-                            <i class="icon-desktop"></i>
+                            <i class="icon-table"></i>
                             <span class="menu-text"> Category </span>
                         </a>
                     </li>
-                  
+
                     <li>
-                        <a target="frame" href="<?php echo base_url() . "index.php/category/"; ?>">
-                            <i class="icon-cogs"></i>
-                            <span class="menu-text"> Category </span>
+                        <a target="frame" href="<?php echo base_url() . "index.php/store/"; ?>">
+                            <i class="icon-home"></i>
+                            <span class="menu-text"> Stores </span>
                         </a>
                     </li>
                     <li>
@@ -398,8 +422,20 @@
                             <span class="menu-text"> Transactions</span>
                         </a>
                     </li>
-                                 
-             
+                    <li>
+                        <a target="frame" href="<?php echo base_url() . "index.php/user/"; ?>">
+                            <i class="icon-user"></i>
+                            <span class="menu-text"> Users</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="frame" href="<?php echo base_url() . "index.php/role/"; ?>">
+                            <i class="icon-lock"></i>
+                            <span class="menu-text"> Roles</span>
+                        </a>
+                    </li>
+
+
                 </ul><!--/.nav-list-->
 
                 <div class="sidebar-collapse" id="sidebar-collapse">

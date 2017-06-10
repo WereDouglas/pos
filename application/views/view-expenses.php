@@ -36,7 +36,7 @@
                                    
                                     <th class="hidden-phone">UNIT COST</th>
                                     <th class="hidden-phone">TOTAL</th>
-                                    <th>SESSION</th>
+                                  
                                     <th class="hidden-phone">USER</th>                                     
                                     <th class="hidden-phone">Actions</th>
 
@@ -55,21 +55,19 @@
                                             <td>
                                                 <?php echo $loop->created; ?>
                                             </td>
-                                            <td id="particular:<?php echo $loop->id; ?>" contenteditable="true">
-                                                <?php echo $loop->particular; ?>
+                                            <td id="itemid:<?php echo $loop->id; ?>" contenteditable="true">
+                                                <?php echo $loop->itemid; ?>
                                             </td>
                                             <td id="qty:<?php echo $loop->id; ?>" contenteditable="true">
                                                 <?php echo $loop->qty; ?>
                                             </td>                                             
-                                            <td id="unit:<?php echo $loop->id; ?>" contenteditable="true">
-                                                <?php echo $loop->unit; ?>
+                                            <td id="price:<?php echo $loop->id; ?>" contenteditable="true">
+                                                <?php echo $loop->price; ?>
                                             </td>
                                             <td id="total:<?php echo $loop->id; ?>" contenteditable="true">
                                                 <?php echo number_format($loop->total); ?>
                                             </td>
-                                           <td>
-                                                
-                                            </td>
+                                          
                                               <td ><?php echo $loop->user; ?></td> 
                                             <td class="edit_td">
                                                 <a class="btn btn-danger btn-xs" href="<?php echo base_url() . "index.php/expense/delete/" . $loop->id; ?>"><li class="fa fa-trash-o">Delete</li></a>

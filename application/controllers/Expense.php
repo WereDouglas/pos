@@ -17,11 +17,9 @@ class Expense extends CI_Controller {
 
     public function index() {
 
-        if ($this->session->userdata('companyID') == "") {
-            $query = $this->Md->query("SELECT *,expenses.id AS id  FROM expenses LEFT JOIN company ON company.id =  expenses.companyID");
-        } else {
-             $query = $this->Md->query("SELECT *,user.name AS user,expenses.id AS id  FROM expenses LEFT JOIN company ON company.id =  expenses.companyID LEFT JOIN user ON user.id = expenses.userID WHERE payment.companyID ='" . $this->session->userdata('companyID') . "'");
-          }
+     
+             $query = $this->Md->query("SELECT *,users.surname AS user,expense.id AS id  FROM expense LEFT JOIN  users ON users.id = expense.userID");
+         
         if ($query) {
             $data['clients'] = $query;
         } else {

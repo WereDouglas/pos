@@ -44,18 +44,17 @@
                                 if (is_array($users) && count($users)) {
                                     foreach ($users as $loop) {
                                         $id = $loop->id;
-                                        $role = $loop->role;
+                                        $role = $loop->roles;
                                         ?>  
                                         <tr class="odd edit_tr" id="<?php echo $id; ?>">
                                             <td >
                                                 <?php echo $loop->id; ?>
                                             </td>
-                                            <td> 
+                                           <td> 
                                                 <?php
                                                 if ($loop->image != "") {
-                                                    ?>
-                                                    <img  height="50px" width="50px"  src="<?= base_url(); ?>uploads/<?php echo $loop->image; ?>"  />
-                                                    <?php
+
+                                                      echo '<img height="50px" width="50px" src="data:image/jpeg;base64,' . $loop->image . '" />';
                                                 } else {
                                                     ?>
                                                     <img  height="50px" width="50px"  src="<?= base_url(); ?>images/user_place.png"  />
@@ -64,8 +63,8 @@
                                                 ?>
                                             </td>
 
-                                            <td id="name:<?php echo $loop->id; ?>" contenteditable="true">
-                                                <?php echo $loop->name; ?>
+                                            <td id="surname:<?php echo $loop->id; ?>" contenteditable="true">
+                                                <?php echo $loop->surname; ?>
                                             </td>
 
                                             <td class="edit_td">
@@ -77,7 +76,7 @@
                                                     if (is_array($roles) && count($roles)) {
                                                         foreach ($roles as $loops) {
                                                             ?>                        
-                                                            <option value="<?= $loops->id ?>" /><?= $loops->name ?>
+                                                            <option value="<?= $loops->id ?>" /><?= $loops->title ?>
                                                             <?php
                                                         }
                                                     }
