@@ -18,15 +18,14 @@ class User extends CI_Controller {
 
     public function index() {
      
-            $query = $this->Md->query("SELECT *,users.id AS id,users.image AS image FROM users");
+        $query = $this->Md->query("SELECT *,users.id AS id,users.image AS image,store.name AS store FROM users LEFT JOIN store ON store.id = users.storeID WHERE  users.orgID='" . $this->session->userdata('orgID') . "' ");
       
         if ($query) {
             $data['users'] = $query;
         } else {
             $data['users'] = array();
         }
-       
-            $query = $this->Md->query("SELECT * FROM roles");
+         $query = $this->Md->query("SELECT * FROM roles");
         
         if ($query) {
             $data['roles'] = $query;
@@ -97,7 +96,7 @@ class User extends CI_Controller {
 
         $this->load->helper(array('form', 'url'));
         $name = urldecode($this->uri->segment(3));
-        $query = $this->Md->query("SELECT * FROM user where id ='" . $name . "'");
+        $query = $this->Md->query("SELECT * FROM users where id ='" . $name . "'");
 
         if ($query) {
             $data['users'] = $query;

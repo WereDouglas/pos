@@ -17,7 +17,7 @@ class Stock extends CI_Controller {
 
     public function index() {
 
-        $query = $this->Md->query("SELECT *,stock.id AS id FROM stock LEFT JOIN item ON item.id = stock.itemID");
+         $query = $this->Md->query("SELECT *,item.name AS name ,store.name AS store FROM item LEFT JOIN stock ON stock.itemID = item.id  LEFT JOIN store ON store.id = stock.storeID WHERE  item.orgID='" . $this->session->userdata('orgID') . "'");
         // $query = $this->Md->query("SELECT * FROM client  ");
 
         if ($query) {

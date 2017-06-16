@@ -13,44 +13,99 @@ $oct = 0;
 $nov = 0;
 $dec = 0;
 
+$jan_e = 0;
+$feb_e = 0;
+$mar_e = 0;
+$apr_e = 0;
+$may_e = 0;
+$jun_e = 0;
+$jul_e = 0;
+$aug_e = 0;
+$sept_e = 0;
+$oct_e = 0;
+$nov_e = 0;
+$dec_e = 0;
+//var_dump($payments_year);
 if (is_array($payments_year) && count($payments_year)) {
     foreach ($payments_year as $loop) {
 
-        if (date("m", strtotime($loop->date)) == "1") {
-            $jan = $jan + 1;
+        if (date("m", strtotime($loop->created)) == "1") {
+            $jan = $jan + $loop->amount;
         }
-        if (date("m", strtotime($loop->date)) == "2") {
-            $feb = $feb + 1;
+        if (date("m", strtotime($loop->created)) == "2") {
+            $feb = $feb + $loop->amount;
         }
-        if (date("m", strtotime($loop->date)) == "3") {
-            $mar = $mar + 1;
+        if (date("m", strtotime($loop->created)) == "3") {
+            $mar = $mar + $loop->amount;
         }
-        if (date("m", strtotime($loop->date)) == "4") {
-            $apr = $apr + 1;
+        if (date("m", strtotime($loop->created)) == "4") {
+            $apr = $apr + $loop->amount;
         }
-        if (date("m", strtotime($loop->date)) == "5") {
-            $may = $may + 1;
+        if (date("m", strtotime($loop->created)) == "5") {
+            $may = $may + $loop->amount;
         }
-        if (date("m", strtotime($loop->date)) == "6") {
-            $jun = $jun + 1;
+        if (date("m", strtotime($loop->created)) == "6") {
+            $jun = $jun + $loop->amount;
         }
-        if (date("m", strtotime($loop->date)) == "7") {
-            $jul = $jul + 1;
+        if (date("m", strtotime($loop->created)) == "7") {
+            $jul = $jul + $loop->amount;
         }
-        if (date("m", strtotime($loop->date)) == "8") {
-            $aug = $aug + 1;
+        if (date("m", strtotime($loop->created)) == "8") {
+            $aug = $aug + $loop->amount;
         }
-        if (date("m", strtotime($loop->date)) == "9") {
-            $sep = $sep + 1;
+        if (date("m", strtotime($loop->created)) == "9") {
+            $sep = $sep + $loop->amount;
         }
-        if (date("m", strtotime($loop->date)) == "10") {
-            $oct = $oct + 1;
+        if (date("m", strtotime($loop->created)) == "10") {
+            $oct = $oct + $loop->amount;
         }
-        if (date("m", strtotime($loop->date)) == "11") {
-            $nov = $jan + 1;
+        if (date("m", strtotime($loop->created)) == "11") {
+            $nov = $jan + $loop->amount;
         }
-        if (date("m", strtotime($loop->date)) == "12") {
-            $dec = $dec + 1;
+        if (date("m", strtotime($loop->created)) == "12") {
+            $dec = $dec + $loop->amount;
+        }
+    }
+
+    if (is_array($expenses_year) && count($expenses_year)) {
+        foreach ($expenses_year as $loop) {
+
+            if (date("m", strtotime($loop->date)) == "1") {
+                $jan_e = $jan_e + $loop->total;
+            }
+            if (date("m", strtotime($loop->date)) == "2") {
+                $feb_e = $feb_e + $loop->total;
+            }
+            if (date("m", strtotime($loop->date)) == "3") {
+                $mar_e = $mar_e + $loop->total;
+            }
+            if (date("m", strtotime($loop->date)) == "4") {
+                $apr_e = $apr_e + $loop->total;
+            }
+            if (date("m", strtotime($loop->date)) == "5") {
+                $may_e = $may_e + $loop->total;
+            }
+            if (date("m", strtotime($loop->date)) == "6") {
+                $jun_e = $jun_e + $loop->total;
+            }
+            if (date("m", strtotime($loop->date)) == "7") {
+                $jul_e = $jul_e + $loop->total;
+            }
+            if (date("m", strtotime($loop->date)) == "8") {
+                $aug_e = $aug_e + $loop->total;
+            }
+            if (date("m", strtotime($loop->date)) == "9") {
+                $sep_e = $sep_e + $loop->total;
+            }
+            if (date("m", strtotime($loop->date)) == "10") {
+                $oct_e = $oct_e + $loop->total;
+            }
+            if (date("m", strtotime($loop->date)) == "11") {
+                $nov_e = $jan_e + $loop->total;
+            }
+            if (date("m", strtotime($loop->date)) == "12") {
+                $dec_e = $de_e + $loop->total;
+            }
         }
     }
     // echo $march.'<br>';
@@ -89,11 +144,12 @@ if (is_array($payments_year) && count($payments_year)) {
                     }
                 },
                 series: [{
-                        name: '<?php echo $this->session->userdata('company'); ?>',
+                        name: 'payments',
                         data: [<?php echo $jan; ?>, <?php echo $feb; ?>, <?php echo $mar; ?>, <?php echo $apr; ?>, <?php echo $may; ?>,<?php echo $jun; ?>,<?php echo $jul; ?>, <?php echo $aug; ?>,<?php echo $sept; ?>, <?php echo $oct; ?>,<?php echo $nov; ?>, <?php echo $dec; ?>]
                     }, {
-                        name: 'sales',
-                        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+                        name: 'expenses',
+                        data: [<?php echo $jan_e; ?>, <?php echo $feb_e; ?>, <?php echo $mar_e; ?>, <?php echo $apr_e; ?>, <?php echo $may_e; ?>,<?php echo $jun_e; ?>,<?php echo $jul_e; ?>, <?php echo $aug_e; ?>,<?php echo $sept_e; ?>, <?php echo $oct_e; ?>,<?php echo $nov_e; ?>, <?php echo $dec_e; ?>]
+
                     }]
             });
         });
@@ -110,7 +166,7 @@ if (is_array($payments_year) && count($payments_year)) {
                     }
                 },
                 title: {
-                    text: 'Ticket Sale Count Distribution'
+                    text: 'Activity Distribution'
                 },
                 tooltip: {
                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -128,18 +184,18 @@ if (is_array($payments_year) && count($payments_year)) {
                 },
                 series: [{
                         type: 'pie',
-                        name: 'Browser share',
+                        name: 'Transaction Distribution',
                         data: [
-                            ['Firefox', 45.0],
-                            ['IE', 26.8],
+                            ['Sales', <?php echo count($sales); ?>],
+                            ['Purchase', 26.8],
                             {
-                                name: 'Chrome',
+                                name: 'Billing',
                                 y: 12.8,
                                 sliced: true,
                                 selected: true
                             },
-                            ['Safari', 8.5],
-                            ['Opera', 6.2],
+                            ['Expenses',<?php echo count($expenses); ?>],
+                            ['Invoices', 6.2],
                             ['Others', 0.7]
                         ]
                     }]
@@ -151,7 +207,7 @@ if (is_array($payments_year) && count($payments_year)) {
 </head>
 <body>
     <div class="page-content">
-     
+
         <div class="row-fluid">
             <div class="span12">
                 <!--PAGE CONTENT BEGINS-->
@@ -162,13 +218,13 @@ if (is_array($payments_year) && count($payments_year)) {
                     </button>
 
                     <i class="icon-ok green"></i>
-
-                   Point of sale
+                    <?php $this->session->userdata('username'); ?>
+                    Point of sale
                     <strong class="green">
                         vuga
                         <small>POS</small>
                     </strong>
-                   
+
                 </div>
 
                 <div class="space-6"></div>
@@ -177,63 +233,63 @@ if (is_array($payments_year) && count($payments_year)) {
                     <div class="span12 infobox-container">
                         <div class="infobox infobox-green  ">
                             <div class="infobox-icon">
-                                <i class="icon-comments"></i>
+                                <i class="icon-shopping-cart"></i>
                             </div>
 
                             <div class="infobox-data">
-                                <span class="infobox-data-number">32</span>
-                                <div class="infobox-content">comments + 2 reviews</div>
+                                <span class="infobox-data-number"><?php echo count($sales); ?></span>
+                                <div class="infobox-content">Sales</div>
                             </div>
                             <div class="stat stat-success">8%</div>
                         </div>
 
                         <div class="infobox infobox-blue  ">
                             <div class="infobox-icon">
-                                <i class="icon-twitter"></i>
+                                <i class="icon-credit-card"></i>
                             </div>
 
                             <div class="infobox-data">
-                                <span class="infobox-data-number">11</span>
-                                <div class="infobox-content">new followers</div>
+                                <span class="infobox-data-number"><?php echo count($payments_today); ?></span>
+                                <div class="infobox-content">Payments today</div>
                             </div>
 
                             <div class="badge badge-success">
-                                +32%
+                                <?php echo count($sum_today); ?>
                                 <i class="icon-arrow-up"></i>
                             </div>
                         </div>
 
                         <div class="infobox infobox-pink  ">
                             <div class="infobox-icon">
-                                <i class="icon-shopping-cart"></i>
+                                <i class="icon-table"></i>
                             </div>
 
                             <div class="infobox-data">
-                                <span class="infobox-data-number">8</span>
-                                <div class="infobox-content">new orders</div>
+                                <span class="infobox-data-number"><?php echo count($bills); ?></span>
+                                <div class="infobox-content">Invoices</div>
                             </div>
                             <div class="stat stat-important">+4%</div>
                         </div>
 
                         <div class="infobox infobox-red  ">
                             <div class="infobox-icon">
-                                <i class="icon-beaker"></i>
+                                <i class="icon-barcode"></i>
                             </div>
 
                             <div class="infobox-data">
-                                <span class="infobox-data-number">7</span>
-                                <div class="infobox-content">experiments</div>
+                                <span class="infobox-data-number"><?php echo count($expenses); ?></span>
+                                <div class="infobox-content">Expenses</div>
                             </div>
                         </div>
 
                         <div class="infobox infobox-orange2  ">
                             <div class="infobox-chart">
-                                <span class="sparkline" data-values="196,128,202,177,154,94,100,170,224"></span>
+                                <i class="icon-chart"></i>
                             </div>
 
                             <div class="infobox-data">
-                                <span class="infobox-data-number">6,251</span>
-                                <div class="infobox-content">pageviews</div>
+                                <span class="infobox-data-number"><?php echo count($items); ?></span>
+                                <div class="infobox-content">Inventory</div>
                             </div>
 
                             <div class="badge badge-success">
@@ -242,18 +298,18 @@ if (is_array($payments_year) && count($payments_year)) {
                             </div>
                         </div>
 
-                      
+
                         <div class="space-6"></div>
 
-                       
+
                     </div>
 
                     <div class="vspace"></div>
 
                 </div><!--/row-->
 
-              
-            
+
+
                 <!--PAGE CONTENT ENDS-->
             </div><!--/.span-->
         </div><!--/.row-fluid-->
@@ -263,13 +319,13 @@ if (is_array($payments_year) && count($payments_year)) {
     <script src="<?= base_url(); ?>js/modules/exporting.js"></script>
     <script src="<?= base_url(); ?>js/highcharts-3d.js"></script>
     <div class="row">
-        <div class="col-md-6">
+        <div class="span6">
             <div id="container" style="min-width: 210px; height: 400px; margin: 0 auto">
 
             </div>
 
         </div>
-        <div class="col-md-6">
+        <div class="span6">
             <div id="container2" style="min-width: 210px; height: 400px; margin: 0 auto">
 
             </div>

@@ -49,15 +49,14 @@
                                     <td>
                                         <div class="profile_img">
                                             <?php
-                                            if ($loop->image != "") {
-                                                ?>
-                                                <img height="20px" width="50px" class="img-responsive avatar-view" src="<?= base_url(); ?>uploads/<?php echo $loop->image; ?>" alt="Avatar" title="Change the avatar">
+                                                if ($loop->image != "") {
 
-                                                <?php
-                                            } else {
+                                                      echo '<img height="50px" width="50px" src="data:image/jpeg;base64,' . $loop->image . '" />';
+                                                } else {
+                                                    ?>
                                                 ?>
 
-                                                <img height="20px" width="50px" class="img-responsive avatar-view" src="<?= base_url(); ?>images/temp.png" alt="image" title="Change the avatar">
+                                                <img height="20px" width="50px" class="img-responsive avatar-view" src="<?= base_url(); ?>images/temp.png" alt="image" title="Change the name">
                                                 <?php
                                             }
                                             ?>

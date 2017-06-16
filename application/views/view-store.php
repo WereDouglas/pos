@@ -24,7 +24,7 @@
                         <table  class="display table table-bordered table-striped" id="dynamic-table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>                                  
+                                                                 
                                     <th>Name</th>
                                     <th>Location</th>                                   
                                     <th>Address</th>    
@@ -42,10 +42,7 @@
                                     foreach ($sups as $loop) {
                                         ?>  
                                         <tr class="odd">
-                                            <td id="id:<?php echo $loop->id; ?>" contenteditable="true">
-                                                <?php echo $loop->id; ?>
-                                            </td>                                           
-
+                                           
                                             <td id="name:<?php echo $loop->id; ?>" contenteditable="true">
                                                 <?php echo $loop->name; ?>
                                             </td>

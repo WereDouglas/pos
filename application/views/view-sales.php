@@ -62,7 +62,7 @@
 
             </section>
 
-            <h3 class="content-header"><font class="blue">Payment reports</font></h3>
+            <h3 class="content-header"><font class="blue">Transaction reports</font></h3>
             <div class="table-responsive scroll">
                 <span id="loading_card" name ="loading_card"><img src="<?= base_url(); ?>images/loading.gif" alt="loading............" /></span>
 
@@ -113,7 +113,7 @@
             var type = $("#type").val();
             if (from.length > 0) {
 
-                $.post("<?php echo base_url() ?>index.php/transaction/payment_report", {from: from, to: to, storeID: storeID, type: type}
+                $.post("<?php echo base_url() ?>index.php/transaction/periodic", {from: from, to: to, storeID: storeID, type: type}
                 , function (response) {
                     //#emailInfo is a span which will show you message
 

@@ -13,7 +13,8 @@ class Api extends CI_Controller {
         $this->load->library('encrypt');
         date_default_timezone_set('Africa/Kampala');
     }
- public function uploading() {
+
+    public function uploading() {
 
         $this->load->helper(array('form', 'url'));
         $save = $this->input->post('save');
@@ -28,19 +29,19 @@ class Api extends CI_Controller {
             echo 'False';
         }
     }
-     public function request() {
+
+    public function request() {
 
         $this->load->helper(array('form', 'url'));
-       $query = $this->input->post('query');
-        $query = "SELECT * FROM sale";
+        $query = $this->input->post('query');
+         // $query = "SELECT * FROM users WHERE contact = '0782481746' AND passwords = 'e10adc3949ba59abbe56e057f20f883e'";
         $result = $this->Md->query($query);
         if ($result) {
             echo json_encode($result);
         } else {
             echo 'false';
         }
-    }     
-
+    }
 
     public function client() {
 

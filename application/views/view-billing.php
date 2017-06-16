@@ -3,260 +3,156 @@
 <style>
     body {
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: 13px;
+        font-size: 12px;
         background-color:#FFFFFF;
     }   
 
 </style>
 <div class="page-content">
     <div class="row">
-        <div class="col-md-12">
-            <div class="block-web">
-                <div class="header">
-                    <div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a> <a class="refresh" href="#"><i class="fa fa-repeat"></i></a> <a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-                       <h3 class="content-header">Stock</h3>
-                    <?php echo $this->session->flashdata('msg'); ?>
+        <div class="col-md-12">          
+            <section>
+                <?php $months = array(1 => "January", 2 => "February", 3 => "March", 4 => "April", 5 => "May", 6 => "June", 7 => "July", 8 => "August", 9 => "September", 10 => "October", 11 => "November", 12 => "December"); ?>
+                <div class="row">
+
+                    <div class="col-md-3" style="margin-top:3px;">
+                        <label>Store</label>
+                        <div class=" form-group">
+                            <input class="easyui-combobox form-control" name="storeID" id="storeID"  data-options="
+                                   url:'<?php echo base_url() ?>index.php/store/lists',
+                                   method:'get',
+                                   valueField:'id',
+                                   textField:'name',
+                                   multiple:false,
+                                   panelHeight:'auto'
+                                   ">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class=" form-group">
+                            <label>Type</label>
+                            <select class="form-control"  name="type" id="type" >
+                                <option value=""></option>
+                                <option value="Sale">Sale</option>
+                                <option value="Purchase">Purchase</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2" style="margin-top:3px;">
+
+                        <div class=" form-group">
+                            <label >From:</label> 
+                            <input class="easyui-datebox form-control" name="from" id="from" value="<?php echo date('d-m-Y'); ?>"/>
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="margin-top:3px;"><div class=" form-group">
+                            <label >To:</label> 
+                            <input class="easyui-datebox form-control" name="to" id="to" value="<?php echo date('d-m-Y'); ?>"/>
+                        </div></div>
+                    <div class="col-md-5" style="margin-top:30px;">                     
+
+                        <button type="button" class="btn btn-info btn-small" id="generate" >generate</button>
+                        <input type="button" name="exportExcel" id="exportExcel" onclick="ExportToExcel('dynamic-table')" value="Export to Excel">
+                        <input type="button" class="btn btn-default  printdiv-btn btn-primary icon-ok" value="print" />
+
+                    </div>
                 </div>
-                <div class="alert alert-info" id="status"></div>
-                <div class="porlets-content">
-                    <div class="table-responsive scroll">
-                        <table  class="display table table-bordered table-striped" id="dynamic-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Code</th>                                   
-                                    <th>Quantity</th>                                  
-                                    <th>Batch. No</th>
-                                    <th>Purchase price</th>
-                                    <th>Sale price</th>
-                                    <th>Previous price</th>
-                                    <th>Total Value</th>
-                                    <th>Date of expiry</th>
-                                    <th>Category</th>
-                                    <th>Barcode</th>
-                                    <th class="hidden-phone">Created</th>
-                                    <th class="hidden-phone">Actions</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <?php
-                                if (is_array($items) && count($items)) {
-                                    foreach ($items as $loop) {
-                                        ?>  
-                                        <tr class="odd">
-                                            <td id="id:<?php echo $loop->id; ?>" contenteditable="false">
-                                                <?php echo $loop->id; ?>
-                                            </td>
-                                            <td> 
-                                                <?php
-                                                if ($loop->image != "") {
-                                                    ?>
-                                                    <img  height="50px" width="50px"  src="<?= base_url(); ?>uploads/<?php echo $loop->image; ?>"  />
-                                                    <?php
-                                                } else {
-                                                    ?>
-                                                    <img  height="50px" width="50px"  src="<?= base_url(); ?>images/user_place.png"  />
-                                                    <?php
-                                                }
-                                                ?>
-                                            </td>
-
-                                            <td id="name:<?php echo $loop->id; ?>" contenteditable="false">
-                                                <?php echo $loop->name; ?>
-                                            </td>
-
-                                            <td id="code:<?php echo $loop->id; ?>" contenteditable="false"><?php echo $loop->code; ?></td>
-
-                                            <td id="qty:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->qty; ?></td>
-                                              <td id="batch:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->batch; ?></td>
-                                            <td id="purchase_price:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->purchase_price; ?></td>
-                                            <td id="sale_price:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->sale_price; ?></td>
-                                            <td id="previous_price:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->previous_price; ?></td>
-                                            <td id="total_value:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->total_value; ?></td>
-
-                                            <td id="expires<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->expires; ?></td>
-                                            <td id="category:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->category; ?></td>
-                                            <td id="barcode:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->barcode; ?></td>
-                                            <td id="created:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->created; ?></td>
-
-                                            <td class="edit_td">
-                                                <a class="btn btn-danger btn-xs" href="<?php echo base_url() . "index.php/stock/delete/" . $loop->id; ?>"><li class="fa fa-trash-o">Delete</li></a>
-
-                                            </td> 
-
-                                        </tr>
-                                        <?php
-                                    }
-                                }
-                                ?>
-
-                            </tbody>
-
-                        </table>
-                    </div><!--/table-responsive-->
-                </div><!--/porlets-content-->
 
 
-            </div><!--/block-web--> 
-        </div><!--/col-md-12--> 
-    </div><!--/row-->           
+            </section>
+
+            <h3 class="content-header"><font class="blue">Billing & Invoicing reports</font></h3>
+            <div class="table-responsive scroll">
+                <span id="loading_card" name ="loading_card"><img src="<?= base_url(); ?>images/loading.gif" alt="loading............" /></span>
+
+
+            </div><!--/table-responsive-->
+        </div><!--/block-web--> 
+    </div><!--/col-md-12--> 
+</div><!--/row-->           
 </div><!--/page-content end--> 
-<!-- Modal -->
-
 
 <!-- /sidebar chats -->  
 <?php require_once(APPPATH . 'views/inner-js.php'); ?>
-<script>
-    $(document).ready(function () {
-        $("#status").hide();
-        $(function () {
-            //acknowledgement message
-            var message_status = $("#status");
-            $("td[contenteditable=true]").blur(function () {
-                var field_id = $(this).attr("id");
-                var value = $(this).text();
-                $.post('<?php echo base_url() . "index.php/stock/update/"; ?>', field_id + "=" + value, function (data) {
-                    if (data != '')
-                    {
-                        message_status.show();
-                        message_status.text(data);
-                        //hide the message
-                        setTimeout(function () {
-                            message_status.hide()
-                        }, 4000);
-                    }
-                });
-            });
+<script src="<?= base_url(); ?>js/table2excel.js"></script>
 
-        });
-    });
+<script type="text/javascript">
+                            function ExportToExcel(datatable) {
+                                var month = $("#month").val();
+                                var year = $("#year").val();
+                                var date = $("#date").val();
+                                var companyID = $("input[name=storeID]").val();
+
+                                var htmltable = document.getElementById('dynamic-table');
+                                var html = htmltable.outerHTML;
+                                window.open('data:application/vnd.ms-excel,' + ';filename=' + month + ' ' + year + '.xlsx;' + encodeURIComponent(html));
+                                var result = "data:application/vnd.ms-excel,";
+                                this.href = result;
+                                this.download = month + ".xls";
+                                return true;
+                            }
+
 
 </script>
-<script>
-    $(document).ready(function () {
-        $('#loading').hide();
 
-        var payment = 0;
 
-//        $('#contact').blur(function () {
-//
-//            //$("#tenantname").val($("input[name=tenant]").val());
-//            // $("#dater").val($("input[name=date]").val());
-//            payment = parseInt($("#sum").val());
-//            $("#words").val(toWords(payment));
-//            var routeID = $("input[name=routeID]").val();
-//            var date = $("input[name=date]").val();
-//            if (routeID !== null) {           // show loader 
-//                $('#loading').show();
-//                $.post("<?php echo base_url() ?>index.php/payment/details", {
-//                    routeID: routeID, date: date
-//                }, function (response) {
-//                    //#emailInfo is a span which will show you message
-//                    $('#loading').hide();
-//                    setTimeout(finishAjax('loading', escape(response)), 400);
-//                });
-//            }
-//
-//            function finishAjax(id, response) {
-//                $('#' + id).html(unescape(response));
-//                $('#' + id).fadeIn();
-//            }
-//        });
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+
+
+        $('#loading_card').hide();
+        $("#generate").on("click", function (e) {
+
+            $('#loading_card').show();
+
+            var storeID = $("input[name=storeID]").val();
+            var from = $("input[name=from]").val();
+            var to = $("input[name=to]").val();
+            var type = $("#type").val();
+            if (from.length > 0) {
+
+                $.post("<?php echo base_url() ?>index.php/transaction/bill_report", {from: from, to: to, storeID: storeID, type: type}
+                , function (response) {
+                    //#emailInfo is a span which will show you message
+
+                    $('#loading_card').hide();
+                    setTimeout(finishAjax('loading_card', escape(response)), 200);
+
+                }).fail(function (e) {
+                    console.log(e);
+                }); //end change
+            } else {
+                alert("Please insert missing information");
+
+                $('#loading_card').hide();
+            }
+
+            function finishAjax(id, response) {
+                $('#' + id).html(unescape(response));
+                $('#' + id).fadeIn();
+            }
+        })
+
+
 
 
     });
-
     $(document).on('click', '.printdiv-btn', function (e) {
         e.preventDefault();
 
-        var $this = $(this);
-        //  var originalContent = $('body').html();
-        var printArea = $this.parents('.printableArea').html();
-
-        $('body').html(printArea);
-        window.print();
-        $('body').html(printArea);
+        printData();
     });
-
-    function SelectedRole(ele) {
-        var payment = 0;
-
-        payment = parseInt($("#sum").val());
-        $("#words").val(toWords(payment));
-        var categoryID = $("input[name=categoryID]").val();
-        var date = $("input[name=date]").val();
-        if (categoryID !== null) {           // show loader 
-            $('#loading').show();
-            $.post("<?php echo base_url() ?>index.php/category/details", {
-                categoryID: categoryID, date: date
-            }, function (response) {
-                //#emailInfo is a span which will show you message
-                $('#loading').hide();
-                setTimeout(finishAjax('loading', escape(response)), 400);
-            });
-        }
-
-        function finishAjax(id, response) {
-            $('#' + id).html(unescape(response));
-            $('#' + id).fadeIn();
-        }
+    function printData()
+    {
+        var divToPrint = document.getElementById("dynamic-table");
+        newWin = window.open("");
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
     }
 
 
-</script>
-<script>
-    var th = ['', 'thousand', 'million', 'billion', 'trillion'];
-    var dg = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-    var tn = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
-    var tw = ['twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
-
-    function toWords(s) {
-        s = s.toString();
-        s = s.replace(/[\, ]/g, '');
-        if (s != parseFloat(s))
-            return 'not a number';
-        var x = s.indexOf('.');
-        if (x == -1)
-            x = s.length;
-        if (x > 15)
-            return 'too big';
-        var n = s.split('');
-        var str = '';
-        var sk = 0;
-        for (var i = 0; i < x; i++) {
-            if ((x - i) % 3 == 2) {
-                if (n[i] == '1') {
-                    str += tn[Number(n[i + 1])] + ' ';
-                    i++;
-                    sk = 1;
-                } else if (n[i] != 0) {
-                    str += tw[n[i] - 2] + ' ';
-                    sk = 1;
-                }
-            } else if (n[i] != 0) { // 0235
-                str += dg[n[i]] + ' ';
-                if ((x - i) % 3 == 0)
-                    str += 'hundred ';
-                sk = 1;
-            }
-            if ((x - i) % 3 == 1) {
-                if (sk)
-                    str += th[(x - i - 1) / 3] + ' ';
-                sk = 0;
-            }
-        }
-
-        if (x != s.length) {
-            var y = s.length;
-            str += 'point ';
-            for (var i = x + 1; i < y; i++)
-                str += dg[n[i]] + ' ';
-        }
-        return str.replace(/\s+/g, ' ');
-    }
 </script>
 

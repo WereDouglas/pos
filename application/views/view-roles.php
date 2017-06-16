@@ -26,11 +26,11 @@
                         <table  class="display table table-bordered table-striped" id="dynamic-table">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                   
                                     <th>Name</th>
                                     <th>Actions</th>
                                     <th>Views</th>
-                                    <th>Tier</th>
+                                  
                                     <th class="hidden-phone"></th>
 
                                 </tr>
@@ -46,9 +46,7 @@
                                     foreach ($roles as $loop) {
                                         ?>  
                                         <tr class="odd">
-                                            <td >
-                                                <?php echo $loop->id; ?>
-                                            </td>
+                                          
                                             <td id="title:<?php echo $loop->id; ?>" contenteditable="true">
                                                 <?php echo $loop->title; ?>
                                             </td>
@@ -58,9 +56,7 @@
                                             <td id="views:<?php echo $loop->id; ?>" contenteditable="true">
                                                 <?php echo $loop->views; ?>
                                             </td>
-                                            <td id="tier:<?php echo $loop->id; ?>" contenteditable="<?php echo $editable; ?>">
-                                                <?php echo $loop->tier; ?>
-                                            </td>
+                                           
                                             <td class="edit_td">
                                                 <a class="btn btn-danger btn-xs" href="<?php echo base_url() . "index.php/role/delete/" . $loop->id; ?>"><li class="fa fa-trash-o">Delete</li></a>
 

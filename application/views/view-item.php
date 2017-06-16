@@ -24,7 +24,7 @@
                         <table  class="display table table-bordered table-striped" id="dynamic-table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                   
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Code</th>                                   
@@ -52,9 +52,7 @@
                                     foreach ($items as $loop) {
                                         ?>  
                                         <tr class="odd">
-                                            <td id="name:<?php echo $loop->id; ?>" contenteditable="false"  >
-                                                <?php echo $loop->id; ?>
-                                            </td>
+                                           
                                             <td> 
                                                 <?php
                                                 if ($loop->image != "") {

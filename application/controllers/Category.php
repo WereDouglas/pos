@@ -16,9 +16,9 @@ class Category extends CI_Controller {
     }
 
     public function index() {
-        
+
         $query = $this->Md->query("SELECT * FROM category");
-       
+
         if ($query) {
             $data['cats'] = $query;
         } else {
@@ -49,14 +49,33 @@ class Category extends CI_Controller {
             redirect('category', 'refresh');
             return;
         }
-             $b = array('id' => $id,'name' => $this->input->post('name'), 'description' => $this->input->post('description'),'created' => date('d-m-Y H:i:s'));
-            $this->Md->save($b, 'category');
-            $status .= '<div class="alert alert-success">  <strong>Information submitted</strong></div>';
-            $this->session->set_flashdata('msg', $status);
-            redirect('category', 'refresh');
-       
+        $file_element_name = 'userfile';
+        $config['file_name'] = $this->input->post('name');
+        $config['upload_path'] = 'uploads/';
+        $config['allowed_types'] = '*';
+        $config['encrypt_name'] = FALSE;
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload($file_element_name)) {
+            $status = 'errors';
+            $msg = $this->upload->display_errors('', '');
+            $status .= '<div class="alert alert-error"> <strong>' . $msg . '</strong></div>';
+        }
+        $data = $this->upload->data();
+        
+        $userfile = $data['file_name'];  
+        $path = 'uploads/'.$userfile;
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 =  base64_encode($data);
+
+        $b = array('id' => $id, 'name' => $this->input->post('name'), 'description' => $this->input->post('description'), 'created' => date('d-m-Y H:i:s'), 'image' =>  $base64);
+        $this->Md->save($b, 'category');
+        $status .= '<div class="alert alert-success">  <strong>Information submitted</strong></div>';
+        $this->session->set_flashdata('msg', $status);
+        redirect('category', 'refresh');
     }
-     public function details() {
+
+    public function details() {
 
         $this->load->helper(array('form', 'url'));
         $role = trim($this->input->post('categoryID'));

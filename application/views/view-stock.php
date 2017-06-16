@@ -14,7 +14,7 @@
             <div class="block-web">
                 <div class="header">
                     <div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a> <a class="refresh" href="#"><i class="fa fa-repeat"></i></a> <a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-                    <h3 class="content-header">Stock</h3>
+                    <h3 class="content-header">Inventory quantities</h3>
                     <?php echo $this->session->flashdata('msg'); ?>
                 </div>
                 <div class="alert alert-info" id="status"></div>
@@ -23,19 +23,18 @@
                         <table  class="display table table-bordered table-striped" id="dynamic-table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+
                                     <th>#</th>
+                                    <th>Store</th>
                                     <th>Name</th>
-                                    <th>Code</th>                                   
-                                    <th>Quantity</th>                                  
-                                    <th>Batch. No</th>
                                     <th>Purchase price</th>
                                     <th>Sale price</th>
-                                    <th>Previous price</th>
-                                    <th>Total Value</th>
+                                    <th>Composition</th>                                 
                                     <th>Date of expiry</th>
                                     <th>Category</th>
                                     <th>Barcode</th>
+                                    <th>Quantity</th>
+
                                     <th class="hidden-phone">Created</th>
                                     <th class="hidden-phone">Actions</th>
 
@@ -44,61 +43,41 @@
                             <tbody>
 
                                 <?php
-
-                                function base64_to_jpeg($base64_string, $output_file) {
-                                    // open the output file for writing
-                                    $ifp = fopen($output_file, 'wb');
-
-                                    // split the string on commas
-                                    // $data[ 0 ] == "data:image/png;base64"
-                                    // $data[ 1 ] == <actual base64 string>
-                                    $data = explode(',', $base64_string);
-
-                                    // we could add validation here with ensuring count( $data ) > 1
-                                    fwrite($ifp, base64_decode($data[1]));
-
-                                    // clean up the file resource
-                                    fclose($ifp);
-
-                                    return $output_file;
-                                }
-
                                 if (is_array($items) && count($items)) {
                                     foreach ($items as $loop) {
-                                    //    $image = base64_to_jpeg($loop->image, 'tmp.jpg');
                                         ?>  
                                         <tr class="odd">
-                                            <td id="id:<?php echo $loop->id; ?>" contenteditable="false">
-                                                <?php echo $loop->id; ?>
-                                            </td>
-                                            <td>  
+
+                                            <td> 
                                                 <?php
-                                                $logodata = $loop->image;
-                                                header("Content-type: image/jpeg");
-                                                echo '<img src="data:image/jpeg;base64,' . base64_decode($logodata) . '" />';
+                                                if ($loop->image != "") {
+
+                                                    echo '<img height="50px" width="50px" src="data:image/jpeg;base64,' . $loop->image . '" />';
+                                                } else {
+                                                    ?>
+                                                    <img  height="50px" width="50px"  src="<?= base_url(); ?>images/user_place.png"  />
+                                                    <?php
+                                                }
                                                 ?>
                                             </td>
-
+                                            <td >
+                                                <?php echo $loop->store; ?>
+                                            </td>
                                             <td id="name:<?php echo $loop->id; ?>" contenteditable="false">
-        <?php echo $loop->name; ?>
+                                                <?php echo $loop->name . '<br>' . $loop->code . '<br>' . $loop->description; ?>
                                             </td>
 
-                                            <td id="code:<?php echo $loop->id; ?>" contenteditable="false"><?php echo $loop->code; ?></td>
-
-                                            <td id="qty:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->qty; ?></td>
-                                            <td id="batch:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->batch; ?></td>
                                             <td id="purchase_price:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->purchase_price; ?></td>
                                             <td id="sale_price:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->sale_price; ?></td>
-                                            <td id="previous_price:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->previous_price; ?></td>
-                                            <td id="total_value:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->total_value; ?></td>
-
-                                            <td id="expires<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->expires; ?></td>
+                                            <td id="composition:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->composition; ?></td>                                           
+                                            <td id="expiry:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->expiry; ?></td>
                                             <td id="category:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->category; ?></td>
                                             <td id="barcode:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->barcode; ?></td>
-                                            <td id="created:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->created; ?></td>
+                                            <td id="quantity:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->quantity; ?></td>
+                                            <td id="created:<?php echo $loop->id; ?>" contenteditable="false"><?php echo $loop->created; ?></td>
 
                                             <td class="edit_td">
-                                                <a class="btn btn-danger btn-xs" href="<?php echo base_url() . "index.php/stock/delete/" . $loop->id; ?>"><li class="fa fa-trash-o">Delete</li></a>
+                                                <a class="btn btn-danger btn-xs" href="<?php echo base_url() . "index.php/item/delete/" . $loop->id; ?>"><li class="fa fa-trash-o">Delete</li></a>
 
                                             </td> 
 
@@ -120,6 +99,158 @@
     </div><!--/row-->           
 </div><!--/page-content end--> 
 <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Add Sale Item</h4>
+            </div>
+            <div class="modal-body">             
+                <form id="station-form" parsley-validate novalidate role="form" class="form-horizontal" name="login-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/item/create'  method="post">
+
+                    <div class="form-group">
+
+                        <input type="text" name="name" placeholder="Name" id="name" required class="form-control"/>
+
+                    </div>  
+                    <div class="form-group">
+
+                        <input type="text" name="code" placeholder="Code" id="code" required class="form-control"/>
+
+                    </div>
+                    <div class="form-group">
+
+                        <input type="text" name="description" placeholder="Description" id="description"  class="form-control"/>
+
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-6"><div class="form-group">
+                                <label > Date of manufacturer:</label> 
+                                <input class="easyui-datebox form-control" name="date_manufactured" id="date_manufactured" value="<?php echo date('d-m-Y'); ?>"/>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label > Date of expiry:</label> 
+                                <input class="easyui-datebox form-control" name="expires" id="expires" value="<?php echo date('d-m-Y'); ?>"/>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-6"> <div class="form-group">
+                                <input type="number" name="purchase_price" placeholder="Purchase price" id="purchase_price" required class="form-control"/>
+
+                            </div> </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="number" name="sale_price" placeholder="Sale price" id="sale_price" required class="form-control"/>
+
+                            </div> 
+                        </div>
+
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="batch" placeholder="Batch No." id="batch"  class="form-control"  class="form-control"/>
+                            </div> </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="barcode" placeholder="Barcode" id="barcode"  class="form-control"/>
+                            </div> 
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-6"><div class="form-group">
+
+                                <input type="text" name="manufacturer" placeholder="Manufactured by" id="manufacturer"  class="form-control" />
+
+                            </div>   
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <input type="text" name="country" placeholder="Country of manufacture" id="country"  class="form-control"/>
+
+                            </div>  
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="number" name="qty" placeholder="Quantity" id="qty"  class="form-control"/>
+
+                            </div> </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="composition" placeholder="Composition" id="composition"  class="form-control"/>
+
+                            </div> 
+                        </div>
+
+                    </div>                    
+                    <div class="col-md-12">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6"></div>
+
+                    </div>                    
+
+
+
+                    <div class="form-group">
+                        <label >Select category</label>
+
+                        <input class="easyui-combobox form-control" name="categoryID" id="categoryID" style="width:100%;height:26px" data-options="
+                               url:'<?php echo base_url() ?>index.php/category/lists',
+                               method:'get',
+                               valueField:'name',
+                               textField:'name',
+                               multiple:false,
+                               panelHeight:'auto',
+                               onChange: function(rec){
+                               SelectedRole('info');
+                               }
+                               ">
+
+                    </div>
+                    <div class="form-group">
+
+                        <span id="loading"  name ="loading"><img src="<?= base_url(); ?>images/loading.gif" alt="loading......" /></span>                                   
+
+                    </div> 
+
+                    <div class="item form-group">                    
+                        <label >Profile picture</label>  
+
+                        <input type="file" name="userfile" id="userfile" class="btn-default btn-small"/>
+                        <div id="imagePreview" ></div>      
+
+                    </div>                   
+
+                    <div class="form-group">
+
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button class="btn btn-default pull-right" type="submit">SUBMIT</button>
+
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- sidebar chats -->
 
 
 <!-- /sidebar chats -->  
@@ -133,7 +264,7 @@
             $("td[contenteditable=true]").blur(function () {
                 var field_id = $(this).attr("id");
                 var value = $(this).text();
-                $.post('<?php echo base_url() . "index.php/stock/update/"; ?>', field_id + "=" + value, function (data) {
+                $.post('<?php echo base_url() . "index.php/item/update/"; ?>', field_id + "=" + value, function (data) {
                     if (data != '')
                     {
                         message_status.show();

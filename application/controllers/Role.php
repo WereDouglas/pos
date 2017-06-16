@@ -19,10 +19,10 @@ class Role extends CI_Controller {
     public function index() {
 
         if ($this->session->userdata('companyID') == "") {
-            $query = $this->Md->query("SELECT * FROM roles");
+            $query = $this->Md->query("SELECT * FROM roles WHERE  orgID='" . $this->session->userdata('orgID') . "'");
         } else {
 
-            $query = $this->Md->query("SELECT * FROM roles WHERE tier<>'Administrative' AND companyID='".$this->session->userdata('companyID')."'");
+            $query = $this->Md->query("SELECT * FROM roles WHERE  orgID='" . $this->session->userdata('orgID') . "'");
         }
 
         if ($query) {

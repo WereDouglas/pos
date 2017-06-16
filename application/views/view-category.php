@@ -26,8 +26,8 @@
                         <table  class="display table table-bordered table-striped" id="dynamic-table">
                             <thead>
                                 <tr>
-                                   
-                                    <th>Name.</th>
+                                   <th>#</th>
+                                    <th>Name</th>
                                     <th>Description</th>
                                     
                                     <th class="hidden-phone">Created</th>
@@ -42,6 +42,18 @@
                                     foreach ($cats as $loop) {
                                         ?>  
                                         <tr class="odd">
+                                            <td> 
+                                                <?php
+                                                if ($loop->image != "") {
+
+                                                      echo '<img height="50px" width="50px" src="data:image/jpeg;base64,' . $loop->image . '" />';
+                                                } else {
+                                                    ?>
+                                                    <img  height="50px" width="50px"  src="<?= base_url(); ?>images/temp.png"  />
+                                                    <?php
+                                                }
+                                                ?>
+                                            </td>
                                             <td id="name:<?php echo $loop->id; ?>" contenteditable="false">
                                                 <?php echo $loop->name; ?>
                                             </td>
@@ -82,8 +94,11 @@
             <div class="modal-body">             
                 <form id="station-form" parsley-validate novalidate role="form" class="form-horizontal" name="login-form" enctype="multipart/form-data"  action='<?= base_url(); ?>index.php/category/create'  method="post">
 
-                   
-
+                   <div class="form-group">                    
+                        <label >Profile picture</label>                        
+                        <input type="file" name="userfile" id="userfile" class="btn-default btn-small form-control"/>
+                        <div id="imagePreview" ></div>                      
+                    </div>
                     <div class="form-group">
 
                         <input type="text" name="name" placeholder="Name" id="name" required class="form-control"/>
@@ -139,4 +154,23 @@
         });
     });
 
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#userfile").on("change", function ()
+        {
+            var files = !!this.files ? this.files : [];
+            if (!files.length || !window.FileReader)
+                return; // no file selected, or no FileReader support
+
+            if (/^image/.test(files[0].type)) { // only image file
+                var reader = new FileReader(); // instance of the FileReader
+                reader.readAsDataURL(files[0]); // read the local file
+
+                reader.onloadend = function () { // set image data as background of div
+                    $("#imagePreview").css("background-image", "url(" + this.result + ")");
+                }
+            }
+        });
+    });
 </script>

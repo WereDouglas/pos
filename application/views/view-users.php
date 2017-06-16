@@ -24,11 +24,11 @@
                         <table  class="display table table-bordered table-striped" id="dynamic-table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                   
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Role/Designation</th>
-                                    <th>Company</th>
+                                    <th>Store</th>
                                     <th>email</th>
                                     <th>Contact</th>
                                     <th class="hidden-phone">Active</th>
@@ -47,9 +47,7 @@
                                         $role = $loop->roles;
                                         ?>  
                                         <tr class="odd edit_tr" id="<?php echo $id; ?>">
-                                            <td >
-                                                <?php echo $loop->id; ?>
-                                            </td>
+                                           
                                            <td> 
                                                 <?php
                                                 if ($loop->image != "") {
@@ -83,7 +81,7 @@
                                                     ?>
                                                 </select>
                                             </td>  
-                                            <td ><?php echo $loop->company; ?></td>
+                                            <td ><?php echo $loop->store; ?></td>
 
                                             <td id="email:<?php echo $loop->id; ?>" contenteditable="true">
                                                 <?php echo $loop->email; ?>

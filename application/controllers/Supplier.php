@@ -17,7 +17,7 @@ class Supplier extends CI_Controller {
 
     public function index() {
 
-        $query = $this->Md->query("SELECT * FROM supplier");
+        $query = $this->Md->query("SELECT * FROM transactor WHERE  orgID='" . $this->session->userdata('orgID') . "' ");
         // $query = $this->Md->query("SELECT * FROM client  ");
 
         if ($query) {

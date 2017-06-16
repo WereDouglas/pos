@@ -17,13 +17,13 @@ class Billing extends CI_Controller {
 
     public function index() {
 
-        $query = $this->Md->query("SELECT * FROM billing");
+        $query = $this->Md->query("SELECT * FROM billing WHERE  orgID='" . $this->session->userdata('orgID') . "'");
         // $query = $this->Md->query("SELECT * FROM client  ");
 
         if ($query) {
-            $data['items'] = $query;
+            $data['bills'] = $query;
         } else {
-            $data['items'] = array();
+            $data['bills'] = array();
         }
         $this->load->view('view-billing', $data);
     }

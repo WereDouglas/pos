@@ -142,7 +142,7 @@ class Store extends CI_Controller {
     }
 
     public function lists() {
-        $query = $this->Md->query("SELECT * FROM supplier");
+        $query = $this->Md->query("SELECT * FROM store");
         //$query = $this->Md->query("SELECT * FROM client");
         echo json_encode($query);
     }

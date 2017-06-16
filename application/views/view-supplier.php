@@ -15,7 +15,7 @@
                 <div class="header">
                     <div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a> <a class="refresh" href="#"><i class="fa fa-repeat"></i></a> <a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
                     <a href="javascript:void(0);" class="add_user" data-toggle="modal" data-target="#myModal"> <i class="fa fa-plus-square"></i> <span> Add</span> </a>
-                    <h3 class="content-header">Supplier</h3>
+                    <h3 class="content-header">Customers and suppliers</h3>
                     <?php echo $this->session->flashdata('msg'); ?>
                 </div>
                 <div class="alert alert-info" id="status"></div>
@@ -24,11 +24,12 @@
                         <table  class="display table table-bordered table-striped" id="dynamic-table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                   
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Contact</th>                                   
-                                    <th>Category</th>                                    
+                                    <th>Category</th> 
+                                      <th>Address</th> 
                                     <th class="hidden-phone">Created</th>
                                     <th class="hidden-phone">Actions</th>
 
@@ -41,15 +42,12 @@
                                     foreach ($sups as $loop) {
                                         ?>  
                                         <tr class="odd">
-                                            <td id="name:<?php echo $loop->id; ?>" contenteditable="true">
-                                                <?php echo $loop->id; ?>
-                                            </td>
+                                            
                                             <td> 
                                                 <?php
                                                 if ($loop->image != "") {
-                                                    ?>
-                                                    <img  height="50px" width="50px"  src="<?= base_url(); ?>uploads/<?php echo $loop->image; ?>"  />
-                                                    <?php
+
+                                                      echo '<img height="50px" width="50px" src="data:image/jpeg;base64,' . $loop->image . '" />';
                                                 } else {
                                                     ?>
                                                     <img  height="50px" width="50px"  src="<?= base_url(); ?>images/user_place.png"  />
@@ -64,8 +62,10 @@
 
                                             <td id="contact:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->contact; ?></td>
    
-                                              <td id="category:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->category; ?></td>
-                                               <td id="created:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->created; ?></td>
+                                              <td id="type:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->type; ?></td>
+                                              <td id="address:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->address; ?></td>
+                                             
+                                              <td id="created:<?php echo $loop->id; ?>" contenteditable="true"><?php echo $loop->created; ?></td>
 
                                             <td class="edit_td">
                                                 <a class="btn btn-danger btn-xs" href="<?php echo base_url() . "index.php/supplier/delete/" . $loop->id; ?>"><li class="fa fa-trash-o">Delete</li></a>

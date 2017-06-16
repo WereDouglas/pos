@@ -10,7 +10,8 @@
 </style>
 <div class="page-content">
     <div class="row">
-        <div class="col-md-12">          
+        <div class="col-md-12">   
+            <?php echo count($items);?>
             <section>
                 <?php $months = array(1 => "January", 2 => "February", 3 => "March", 4 => "April", 5 => "May", 6 => "June", 7 => "July", 8 => "August", 9 => "September", 10 => "October", 11 => "November", 12 => "December"); ?>
                 <div class="row">
@@ -62,7 +63,7 @@
 
             </section>
 
-            <h3 class="content-header"><font class="blue">Payment reports</font></h3>
+            <h3 class="content-header"><font class="blue">Inventory And Stock taking records</font></h3>
             <div class="table-responsive scroll">
                 <span id="loading_card" name ="loading_card"><img src="<?= base_url(); ?>images/loading.gif" alt="loading............" /></span>
 
@@ -113,7 +114,7 @@
             var type = $("#type").val();
             if (from.length > 0) {
 
-                $.post("<?php echo base_url() ?>index.php/transaction/payment_report", {from: from, to: to, storeID: storeID, type: type}
+                $.post("<?php echo base_url() ?>index.php/taking/report", {from: from, to: to, storeID: storeID, type: type}
                 , function (response) {
                     //#emailInfo is a span which will show you message
 

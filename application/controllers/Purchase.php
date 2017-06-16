@@ -13,6 +13,14 @@ class Purchase extends CI_Controller {
     }
 
     public function index() {
+        $query = $this->Md->query("SELECT * FROM item LEFT JOIN stock ON stock.itemID = item.id  WHERE item.orgID='" . $this->session->userdata('orgID') . "'");
+        // $query = $this->Md->query("SELECT * FROM client  ");
+
+        if ($query) {
+            $data['items'] = $query;
+        } else {
+            $data['items'] = array();
+        }
        
         $this->load->view('purchase-page', $data);
     }

@@ -12,7 +12,7 @@
         <link href="<?= base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" />
         <link href="<?= base_url(); ?>assets/css/bootstrap-responsive.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="<?= base_url(); ?>assets/css/font-awesome.min.css" />
-
+        <link rel=icon href="<?= base_url(); ?>images/favicon.ico">
         <!--[if IE 7]>
           <link rel="stylesheet" href="<?= base_url(); ?>assets/css/font-awesome-ie7.min.css" />
         <![endif]-->
@@ -59,10 +59,10 @@
                                     <div id="login-box" class="login-box visible widget-box no-border">
                                         <div class="widget-body">
                                             <div class="widget-main">
-                                                <img height="120px" width="220px"src="<?= base_url(); ?>images/vugapos.png" class="msg-photo" alt="Alex's Avatar" />
-
+                                                <a href="<?php echo base_url() . "index.php/web"; ?>">  <img height="120px" width="220px"src="<?= base_url(); ?>images/vugapos.png" class="msg-photo" alt="LOGO" /></a>
+                                                <?php echo $this->session->flashdata('msg'); ?>
                                                 <h4 class="header blue lighter bigger">
-                                                    <i class="icon-coffee green"></i>
+                                                    <i class="icon-lightbulb green"></i>
                                                     Please Enter Your Information
                                                 </h4>
 
@@ -73,14 +73,14 @@
                                                     <fieldset>
                                                         <label>
                                                             <span class="block input-icon input-icon-right">
-                                                                <input type="text" class="span12" placeholder="Username" />
+                                                                <input type="text" class="span12" name="name" placeholder="Username" />
                                                                 <i class="icon-user"></i>
                                                             </span>
                                                         </label>
 
                                                         <label>
                                                             <span class="block input-icon input-icon-right">
-                                                                <input type="password" class="span12" placeholder="Password" />
+                                                                <input type="password" class="span12" name="password" placeholder="Password" />
                                                                 <i class="icon-lock"></i>
                                                             </span>
                                                         </label>
@@ -103,22 +103,14 @@
                                                     </fieldset>
                                                 </form>
 
-                                                <div class="social-or-login center">
-                                                    <span class="bigger-110">Or Login Using</span>
-                                                </div>
+
 
                                                 <div class="social-login center">
-                                                    <a class="btn btn-primary">
-                                                        <i class="icon-facebook"></i>
+                                                    <a href="<?php echo base_url() . "index.php/web"; ?>">
+                                                        <i class="icon-globe"></i>   Visit us
                                                     </a>
 
-                                                    <a class="btn btn-info">
-                                                        <i class="icon-twitter"></i>
-                                                    </a>
 
-                                                    <a class="btn btn-danger">
-                                                        <i class="icon-google-plus"></i>
-                                                    </a>
                                                 </div>
                                             </div><!--/widget-main-->
 
@@ -278,7 +270,7 @@
         <!--[if !IE]>-->
 
         <script type="text/javascript">
-                                                                                            window.jQuery || document.write("<script src='<?= base_url(); ?>assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+                                                    window.jQuery || document.write("<script src='<?= base_url(); ?>assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
         </script>
 
         <!--<![endif]-->
