@@ -113,7 +113,7 @@
             var type = $("#type").val();
             if (from.length > 0) {
 
-                $.post("<?php echo base_url() ?>index.php/transaction/expense_report", {from: from, to: to, storeID: storeID, type: type}
+                $.post("<?php echo base_url() ?>index.php/expense/report", {from: from, to: to, storeID: storeID, type: type}
                 , function (response) {
                     //#emailInfo is a span which will show you message
 
